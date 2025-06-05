@@ -1,33 +1,24 @@
-FROM ubuntu:18.04
+# Use a minimal Python image
+FROM python:3.11-slim
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
-RUN echo y | apt-get install locales
-RUN echo y | apt install build-essential
-RUN apt -qq install -y --no-install-recommends \
-    curl \
-    git \
-    gnupg2 \
-    wget \
+# Environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PORT=8080
 
-RUN set -ex; \
-    apt-get update \
-    && apt-get install -y --no-install-recommends \
-        busybox \
-	git \
-	python3 \
-	python3-dev \
-	python3-pip \
-	python3-lxml \
-	pv \
-	&& apt-get autoclean \
-        && apt-get autoremove \
-        && rm -rf /var/lib/apt/lists/*
+# Set working directory
+WORKDIR /app
 
-RUN pip3 install setuptools wheel yarl multidict
+# System dependencies (for some Python libs)
+RUN apt-get update && apt-get install -y gcc libffi-dev libssl-dev && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
 COPY requirements.txt .
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN dpkg-reconfigure locales
+
+# Copy all files to the container
 COPY . /app
 
-CMD ["python3", "bot.py"]
+# Run the bot
+CMD ["python", "bot.py"]
