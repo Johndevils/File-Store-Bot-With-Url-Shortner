@@ -1,4 +1,3 @@
-# (c) @TeleRoidGroup || @PredatorHackerzZ
 
 import os
 import asyncio
@@ -83,7 +82,7 @@ async def start(bot: Client, cmd: Message):
                     ],
                     [
                         InlineKeyboardButton("Support Group", url="https://t.me/codexfusion"),
-                        InlineKeyboardButton("YouTube Channel", url="")
+                        InlineKeyboardButton("YouTube Channel", url="https://youtube.com")
                     ]
                 ]
             )
@@ -124,7 +123,7 @@ async def main(bot: Client, message: Message):
                 return
 
         if message.from_user.id in Config.BANNED_USERS:
-            await message.reply_text("Sorry, You are banned!\n\nContact [𝙎𝙪𝙥𝙥𝙤𝙧𝙩 𝙂𝙧𝙤𝙪𝙥](https://t.me/VJ_Bot_Disscussion)",
+            await message.reply_text("Sorry, You are banned!\n\nContact [𝙎𝙪𝙥𝙥𝙤𝙧𝙩 𝙂𝙧𝙤𝙪𝙥](https://t.me/codexfusion)",
                                      disable_web_page_preview=True)
             return
 
@@ -152,7 +151,7 @@ async def main(bot: Client, message: Message):
         try:
             forwarded_msg = await message.forward(Config.DB_CHANNEL)
             file_er_id = str(forwarded_msg.id)
-            share_link = f"https://t.me/{Config.BOT_USERNAME}?start=VJBotz_{str_to_b64(file_er_id)}"
+            share_link = f"https://t.me/{Config.BOT_USERNAME}?start=Arsynox _{str_to_b64(file_er_id)}"
             CH_edit = await bot.edit_message_reply_markup(message.chat.id, message.id,
                                                           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
                                                               "Get Sharable Link", url=share_link)]]))
@@ -469,3 +468,4 @@ async def button(bot: Client, cmd: CallbackQuery):
 
 
 Bot.run()
+mqb9KENgmk&pp=ygUJdHVtIGhpIGhv
